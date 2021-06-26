@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import TimeAgo from 'react-timeago';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -28,18 +28,18 @@ export interface WorkloadItemProps extends
   WorkloadItemMethodProps,
   WorkloadItemDispatchProps {}
 
-
 const WorkloadItem: React.SFC<WorkloadItemProps> = (props) => {
+  const intervalRef = useRef<any>(null);
   useEffect(()=>{
     const {completeDate, id, updateWorkloadStatus} = props;
     const completedTime =  completeDate.getTime();
     const checkStatus = async ()=>{
-      clearInterval(interval);
+      clearInterval(intervalRef.current);
       const res = await workloadService.checkStatus({id});
       updateWorkloadStatus(id, res.status)
 
     }
-    const interval = setInterval(()=>{
+    intervalRef.current = setInterval(()=>{
       const currentTime = new Date().getTime();
       if(currentTime>=completedTime){
         checkStatus();
@@ -48,10 +48,18 @@ const WorkloadItem: React.SFC<WorkloadItemProps> = (props) => {
     },1000);
 
     return ()=>{
-      clearInterval(interval)
+      clearInterval(intervalRef.current)
     }
     
   },[])
+
+  const handleCancel = ()=>{
+    if(intervalRef.current){
+      clearInterval(intervalRef.current)
+    }
+    props.onCancel();
+    
+  }
 
   return(
   <div className="WorkloadItem">
@@ -66,7 +74,7 @@ const WorkloadItem: React.SFC<WorkloadItemProps> = (props) => {
             <span><TimeAgo date={props.completeDate} /></span>
             <button 
               className="WorkloadItem-secondaryButton" 
-              onClick={props.onCancel}
+              onClick={handleCancel}
             >
               Cancel
             </button>
