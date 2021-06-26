@@ -23,6 +23,7 @@ const initialState: WorkloadsState = {};
 
 export const workloadReducer = (state: WorkloadsState = initialState, action: WorkloadsAction): WorkloadsState => {
   switch (action.type) {
+
     case getType(workloadActions.created):
       return { 
         ...state,

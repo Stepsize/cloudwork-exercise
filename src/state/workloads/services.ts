@@ -2,7 +2,6 @@ import moment from 'moment';
 
 import { Status } from './types';
 
-
 export class WorkloadService {
 
   private workLoads: { [key in number]: Work } = {};

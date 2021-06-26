@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { RootAction, RootState } from '../../state';
 import { cancel } from '../../state/workloads/actions';
-import { WorkloadItem, WorkloadItemStateProps } from '../WorkloadItem';
+import { WorkloadItemContainer, WorkloadItemStateProps } from '../WorkloadItem';
 
 
 export interface WorkloadListStateProps {
@@ -28,7 +28,7 @@ const WorkloadList: React.SFC<WorkloadListProps> = ({ workloads, cancelWorkload 
     <ol>
       {workloads.map((workload) => (
         <li key={workload.id}>
-          <WorkloadItem {...workload} onCancel={() => cancelWorkload(workload.id)} />
+          <WorkloadItemContainer {...workload} onCancel={() => cancelWorkload(workload.id)} />
         </li>
       ))}
     </ol>
