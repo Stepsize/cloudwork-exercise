@@ -8,6 +8,8 @@ import { Status } from '../../state/workloads';
 import {workloadService} from '../../state/workloads/epics';
 import { updateStatus } from '../../state/workloads/actions';
 
+import './WorkloadItem.css';
+
 interface WorkloadItemDispatchProps {
   updateWorkloadStatus: (id:number, status:Status) => void;
 }
@@ -62,7 +64,7 @@ const WorkloadItem: React.SFC<WorkloadItemProps> = (props) => {
   }
 
   return(
-  <div className="WorkloadItem">
+  <div className={`WorkloadItem ${props.status.toLowerCase()}`}>
     <div>
       <h3 className="WorkloadItem-heading">Workload #{props.id}</h3>
       <span className="WorkloadItem-subHeading">Complexity: {props.complexity}</span>

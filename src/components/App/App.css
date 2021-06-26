@@ -5,11 +5,5 @@
 .app .workload-container{
     display: flex;
     flex-wrap: nowrap;
-}
-
-.app .workload-list-container{
-    flex:1
-}
-.app .workload-form-container{
-    flex:1
+    justify-content: space-between;
 }

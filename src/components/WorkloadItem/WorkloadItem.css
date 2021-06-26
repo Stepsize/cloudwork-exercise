@@ -1,0 +1,28 @@
+.WorkloadItem{
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.WorkloadItem.working{
+  background-color: grey;
+  color: #fff;
+  
+}
+
+.WorkloadItem.success{
+    background-color: #51be99;
+    color: #fff;
+    
+  }
+  
+  .WorkloadItem.failure{
+    background-color: #dd6868;
+    color: #fff;
+  }
+  
+  .WorkloadItem.canceled{
+    background-color: #c7c73e;
+    color: #fff;
+
+  }
